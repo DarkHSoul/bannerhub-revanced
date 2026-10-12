@@ -176,7 +176,9 @@ final class BhComponentLayout {
             for (String f : files) {
                 String b = base(f).toLowerCase(Locale.ROOT);
                 if (b.endsWith(".so") && (b.contains("vulkan") || b.contains("adreno")
-                        || b.contains("turnip") || b.contains("freedreno"))) candidates.add(f);
+                        || b.contains("turnip") || b.contains("freedreno")
+                        || b.contains("radv") || b.contains("xclipse")
+                        || b.contains("radeon") || b.contains("exynos"))) candidates.add(f);
             }
             if (candidates.size() == 1) libPath = candidates.get(0);
             else if (candidates.size() > 1) {

@@ -74,7 +74,7 @@ final class BhComponentRepo {
             case FAM_VKD3D:  return "VKD3D-Proton";
             case FAM_BOX64:  return "Box64";
             case FAM_FEX:    return "FEXCore";
-            case FAM_DRIVER: return "GPU Driver / Turnip";
+            case FAM_DRIVER: return "GPU Driver / Turnip / RADV";
             default:         return fam;
         }
     }
@@ -115,7 +115,9 @@ final class BhComponentRepo {
             case "gpudriver":
             case "gpu_driver":
             case "driver":
-            case "turnip":       return FAM_DRIVER;
+            case "turnip":
+            case "radv":
+            case "xclipse":      return FAM_DRIVER;
             case "dxvk":
             case "d7vk":         return FAM_DXVK;   // 3.8.1 listed d7vk under DXVK too
             case "vkd3d":
@@ -143,7 +145,9 @@ final class BhComponentRepo {
         if (n.contains("fex")) return FAM_FEX;
         if (n.contains("vkd3d")) return FAM_VKD3D;
         if (n.contains("turnip") || n.contains("adreno") || n.contains("driver")
-                || n.contains("qualcomm") || n.contains("mesa") || n.contains("freedreno")) {
+                || n.contains("qualcomm") || n.contains("mesa") || n.contains("freedreno")
+                || n.contains("radv") || n.contains("xclipse") || n.contains("exynos")
+                || n.contains("radeon")) {
             return FAM_DRIVER;
         }
         if (n.contains("dxvk") || n.contains("d7vk")) return FAM_DXVK;
@@ -183,6 +187,15 @@ final class BhComponentRepo {
                 NIGHTLIES_RAW + "mtr_drivers.json", KIND_FEED),
         new Repo("white", "Whitebelyash GPU Drivers", "Adreno / Turnip driver zips",
                 NIGHTLIES_RAW + "white_drivers.json", KIND_FEED),
+        new Repo("radv_xclipse", "RADV Xclipse (Samsung/AMD)", "Samsung Exynos 2200/2400 AMD Xclipse RADV driver releases",
+                "https://api.github.com/repos/JimVulkan/radv-xclipse/releases?per_page=30",
+                KIND_GITHUB_RELEASES),
+        new Repo("exynostools", "ExynosTools", "Vulkan compatibility layer & wrapper for Samsung Xclipse",
+                "https://api.github.com/repos/WearyConcern1165/ExynosTools/releases?per_page=30",
+                KIND_GITHUB_RELEASES),
+        new Repo("winxclipse", "WinXclipse", "Exynos & Xclipse optimized components and drivers",
+                "https://api.github.com/repos/avavo/WinXclipse/releases?per_page=30",
+                KIND_GITHUB_RELEASES),
         new Repo("nightlies", "The412Banner Nightlies", "Box64, FEX, DXVK, VKD3D and drivers — every build",
                 NIGHTLIES_RAW + "nightlies_components.json", KIND_FEED),
         new Repo("nightly_builds", "Nightly builds", "The newest nightly-* GitHub releases, per build",
